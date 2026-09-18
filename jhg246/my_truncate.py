@@ -37,6 +37,16 @@
 # Specification Below
 # ~~~~~~~~~~~~~~~~~~~~
 # Given a string `text`, produce a string `result` such that:
+
+# `text`: the input string to (possibly) truncate. May be empty, may
+# contain leading/trailing whitespace, and may contain codepoints
+# outside the Basic Multilingual Plane (e.g., emoji) or combining
+# marks.
+#
+# Returns: `text` unchanged if it has fewer than 100 codepoints;
+# otherwise a string consisting of the first 97 codepoints of `text`
+# (with any trailing whitespace run stripped) followed by the literal
+# three-character sequence "...".
 #
 # 1. A "character" is defined as a single Unicode codepoint (not a byte,
 #    grapheme cluster, or UTF-16 code unit). All lengths below are measured
@@ -63,16 +73,8 @@
 #    cluster (e.g., separating a base character from a combining mark or
 #    modifier); this is explicitly acceptable and `truncate` performs no
 #    grapheme-cluster-boundary detection.
+
 def truncate(text):
-    # `text`: the input string to (possibly) truncate. May be empty, may
-    # contain leading/trailing whitespace, and may contain codepoints
-    # outside the Basic Multilingual Plane (e.g., emoji) or combining
-    # marks.
-    #
-    # Returns: `text` unchanged if it has fewer than 100 codepoints;
-    # otherwise a string consisting of the first 97 codepoints of `text`
-    # (with any trailing whitespace run stripped) followed by the literal
-    # three-character sequence "...".
     if len(text) < 100:
         return text
 
